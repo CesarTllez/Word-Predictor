@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './_service/api.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Frontend';
-  word: string = ""
-  placeholder: string = `${this.word} speak`
+  word: string = "";
+  placeholder: string = `${this.word} speak`;
+  
+  constructor(
+    private _api: ApiService
+  ){}
+
+  write(){
+    this._api.getSuggestion(this.word).subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log(error)
+      }
+    );
+  }
 }

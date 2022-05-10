@@ -10,7 +10,7 @@
     <h1 class="title">Word Predictor</h1>
   </header>
   <main>
-    <input type="text" [(ngModel)]="word">
+    <input type="text" [(ngModel)]="word" (input)="write()">
   </main>
 </body>
 </html>

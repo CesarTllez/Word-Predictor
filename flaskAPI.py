@@ -13,6 +13,6 @@ def greet(word):
 if __name__ == '__main__':
     app.run(
         debug = 'True',
-        host = '192.168.0.12',
+        host = 'localhost',
         port = '5001'
     )
