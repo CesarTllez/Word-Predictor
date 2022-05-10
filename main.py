@@ -5,6 +5,9 @@ acceptanceSpeech = {
 }
 
 def wordSeparator(speech):
+    """Method that allows changing or eliminating
+    the special characters of the speech and separating
+    the words of it."""
     for paragraph in speech:
         for letter in paragraph:
             if letter == 'á':
