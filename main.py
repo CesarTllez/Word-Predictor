@@ -1,7 +1,8 @@
 acceptanceSpeech = {
     'speech': open("discurso.txt", "r", encoding="utf-8"),
     'speechWSC': '',
-    'regex': ',.?¿<>«»()!¡:'
+    'regex': ',.?¿<>«»()!¡:',
+    'wordPair': []
 }
 
 def wordSeparator(speech):
@@ -26,7 +27,23 @@ def wordSeparator(speech):
                 pass
             else:
                 acceptanceSpeech['speechWSC'] += letter.lower()
-    acceptanceSpeech['speech'].close()
+    
     return acceptanceSpeech['speechWSC'].split()
 
-print(wordSeparator(acceptanceSpeech['speech']))
+from statistics import mode
+
+def getSuggestion(phraseInput):
+    """Method that allows get the next words corresponding 
+    to the input word"""
+    wordInputArray = phraseInput.split()
+    if len(wordInputArray) < 3:
+        wordSeparatorAux = wordSeparator(acceptanceSpeech['speech'])
+        index = 0; acceptanceSpeech['wordPair'].clear()
+        for word in wordSeparatorAux:
+            if word == wordInputArray[len(wordInputArray)-1]:
+                if (index+1) != len(wordSeparatorAux):
+                    acceptanceSpeech['wordPair'].append(wordSeparatorAux[index+1])
+            index += 1
+
+        if len(acceptanceSpeech['wordPair']) != 0:
+            return mode(acceptanceSpeech['wordPair'])

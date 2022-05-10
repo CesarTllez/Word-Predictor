@@ -8,16 +8,23 @@ import { ApiService } from './_service/api.service';
 })
 export class AppComponent {
   title = 'Frontend';
-  word: string = "";
-  placeholder: string = `${this.word} speak`;
+  word: string;
+  suggestionWord: any;
   
   constructor(
     private _api: ApiService
-  ){}
+  ){
+    this.word = "";
+    this.suggestionWord = {
+      "suggestion": "",
+      "word": ""
+    }
+  }
 
   write(){
     this._api.getSuggestion(this.word).subscribe(
       response => {
+        this.suggestionWord = response;
         console.log(response)
       },
       error => {
